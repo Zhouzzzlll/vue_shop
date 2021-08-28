@@ -5,6 +5,16 @@
         <el-input style="width:500px"  v-model="tiktokUrl" placeholder="请输入短视频链接,先点击获取地址后点击跳转"></el-input>
         <el-button class="tiktok" type="primary" @click="searchTiktok">获取地址</el-button>
         <el-link class="jump" type="primary" :href=this.url :underline=false :disabled='a' icon='el-icon-s-promotion' >点击跳转</el-link>
+
+        <div>
+          <el-input
+          type="textarea"
+          :rows="5"
+          placeholder="点击解析后的链接在这里呀"
+          v-model="url" style="margin-top: 100px">
+
+          </el-input>
+        </div>
     </div>
 
 </template>
@@ -21,10 +31,9 @@ export default {
     
     methods:{
         searchTiktok(){
-            this.$http.post('https://v1.alapi.cn/api/video/url',{
-                   url:this.tiktokUrl
-               
-                
+            this.$http.post('https://v2.alapi.cn/api/video/url',{
+                   url:this.tiktokUrl,
+              token:'ntrCNUfbH6NT7sMH'
             }).then(res=>{
                 if(res.data.code===200){
                  this.a=false
